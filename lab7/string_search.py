@@ -12,9 +12,17 @@ def naive_search(text, pattern):
     matches = []
 
     # TODO 1.2: compare characters at each shift and collect complete matches
+    
+    for s in range(n - m + 1):
+        j = 0
+        while j < m and text[s + j] == pattern[j]:
+            j = j + 1
+        if j == m:
+            matches.append(text[s:s+j+1])
+    return matches
+    
     raise NotImplementedError("Complete naive_search")
 
-    return matches
 
 
 def rabin_karp(text, pattern, d=256, q=101):
