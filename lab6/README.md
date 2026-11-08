@@ -114,9 +114,9 @@ worked for you.
 | Key $k$ | Binary (8-bit) | Last 3 Bits | Division $k \bmod 8$ ($m = 8$) | Prime Division $k \bmod 7$ ($m = 7$) | Multiplication $\lfloor 8 \cdot ((k \cdot A) \bmod 1) \rfloor$ ($m = 8$) |
 |---|---|---|---|---|---|
 | 19 | `00010 011` | `011` | `19 % 8 = 3` | `19 % 7 = 5` | `floor(8 * 0.7426) = 5` |
-| 51 | `00110 011` | `011` | TODO | TODO | `floor(8 * 0.5197) = 4` |
-| 83 | `01010 011` | `011` | TODO | TODO | `floor(8 * 0.2968) = 2` |
-| 115 | `01110 011` | `011` | TODO | TODO | `floor(8 * 0.0739) = 0` |
+| 51 | `00110 011` | `011` | `51 % 8 = 3` | `51 % 7 = 2` | `floor(8 * 0.5197) = 4` |
+| 83 | `01010 011` | `011` | `83 % 8 = 3` | `83 % 7 = 6` | `floor(8 * 0.2968) = 2` |
+| 115 | `01110 011` | `011` | `115 % 8 = 3` | `115 % 7 = 3` | `floor(8 * 0.0739) = 0` |
 
 ### 1.2 Implementation
 
@@ -136,6 +136,8 @@ python3 hash_functions_practice.py
 **TODO 1.3:** Look at your `k mod 8` column vs. your `k mod 7` column in
 Table 1.1. Why did all four keys collide into slot `3` when $m = 8$, and why did
 choosing a prime table size ($m = 7$) spread them into different slots?
+
+The four keys collided when we used `m = 8` because `8` is a power of `2`. On the other hand, `7` is a prime number, so it spread the keys into different slots.
 
 ---
 
