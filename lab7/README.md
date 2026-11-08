@@ -174,9 +174,18 @@ At shift `6`, the hash is `7`; all five characters match, so record `6`.
 1. **Move from shift `6` to `7`.** Which digit leaves the window, and which
    digit enters? Substitute them into the rolling-hash formula and calculate
    the new hash.
+   
+   Subtract code(T[s]) * h to remove the outgoing character.
+  Multiply by d to shift the remaining characters left.
+  Add code(T[s + m]), then take the remainder modulo q
+
+
+   --> `3` leaves the window and `2` enters it. The new hash is `[(31415 - 3 * 10000) * 10 + 2] % 13 = 8`. 
 2. **Check shift `12`.** Its hash is `7`, so compare the characters. List the
    text and pattern indices checked before stopping. Is this a match or a
    spurious hit?
+
+   --> Shift `12` gives string `67399`. We check only the first character before stopping and recording this as a spurious hit.
 
 ### 2.2 Implementation
 
@@ -203,11 +212,15 @@ hash comparisons and character checks.
 
 | Case | Build hashes | Search | Total |
 |---|---|---|---|
-| Best | TODO | TODO | TODO |
-| Worst | TODO | TODO | TODO |
+| Best | `O(m)` | `O(n)` | `O(n + m)` |
+| Worst | `O(m)` | `O(n * m)` | `O(n * m)` |
 
 For each case, explain in one sentence how many windows need character checks
 and how many characters are checked in each one.
+
+**Best case:** only one window needs a character check because only one window has the hash we're searching for. In that single window, $m$ characters need to be checked because all of the characters in the window will match.
+
+**Worst case:** each window will need a character check because every window will have the hash we're searching for. In each of those windows, $m$ characters will have to be searched because all of the characters in the window will match.
 
 ### Connection: Searching for several patterns
 

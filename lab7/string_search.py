@@ -40,9 +40,27 @@ def rabin_karp(text, pattern, d=256, q=101):
     t = 0
 
     # TODO 2.2: build the initial hashes, verify hits, and roll to each next window
-    raise NotImplementedError("Complete rabin_karp")
-
+    
+    for j in range(0, m):
+        p = (d * p + ord(pattern[j])) % q
+        t = (d * t + ord(text[j])) % q
+    
+    for s in range(0, n - m + 1):
+        if p == t:
+            match = True
+            # check for spurious hit
+            for r in range(0, m):
+                if text[s+r] != pattern[r]:
+                    match = False
+            
+            if match:
+                matches.append(s)
+        if s < n - m:
+            t = (d * (t - ord(text[s]) * h) + ord(text[s + m])) % q
+    
     return matches
+    
+    raise NotImplementedError("Complete rabin_karp")
 
 
 def compute_prefix_function(pattern):
