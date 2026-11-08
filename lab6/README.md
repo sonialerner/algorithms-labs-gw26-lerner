@@ -231,9 +231,9 @@ are worked for you.
 |---|---|---|---|---|---|
 | 1 | `(12, "A")` | `12 % 7 = 5` | `[[12, "A"]]` | 1 | `1/7 ≈ 0.14` |
 | 2 | `(19, "B")` | `19 % 7 = 5` | `[[12, "A"], [19, "B"]]` | 2 | `2/7 ≈ 0.29` |
-| 3 | `(24, "C")` | TODO | TODO | TODO | TODO |
-| 4 | `(26, "D")` | TODO | TODO | TODO | TODO |
-| 5 | `(31, "E")` | TODO | TODO | TODO | TODO |
+| 3 | `(24, "C")` | `24 % 7 = 3` | `[[24, "C"]]` | 3 | `3/7 ≈ ` |
+| 4 | `(26, "D")` | `26 % 7 = 5` | `[[12, "A"], [19, "B"], [26, "D"]]` | 4 | `4/7 ≈ ` |
+| 5 | `(31, "E")` | `31 % 7 = 3` | `[[24, "C"], [31, "E"]]` | 5 | `5/7 ≈ ` |
 
 ### 2.2 Implementation
 
@@ -256,6 +256,8 @@ $2M = 8$, why do we have to recompute `key % new_capacity` for every key
 (for example, key `14` moves from bucket `14 % 4 = 2` to bucket `14 % 8 = 6`)
 instead of just copying bucket `2` from the old table into bucket `2` of the new
 table?
+
+We have to recompute `key % new_capacity` for every key because the hashing outputs can (and likely will) change when we increase the capacity. If we don't do this, future lookups could be incorrect as they would hash to the wrong index.
 
 ---
 
