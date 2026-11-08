@@ -356,11 +356,11 @@ $h(k) = k \bmod 7$). The first two insertions and first lookup are worked.
 |---|---|---|---|---|---|
 | Insert `12` | `12 % 7 = 5` | `5` | 1 | Placed at slot `5` | `[_, _, _, _, _, 12, _]` |
 | Insert `19` | `19 % 7 = 5` | `5 -> 6` | 2 | Placed at slot `6` | `[_, _, _, _, _, 12, 19]` |
-| Insert `26` | `26 % 7 = 5` | TODO | TODO | Placed at slot `0` | `[26, _, _, _, _, 12, 19]` |
-| Insert `3` | `3 % 7 = 3` | TODO | TODO | Placed at slot `3` | `[26, _, _, 3, _, 12, 19]` |
-| Insert `10` | `10 % 7 = 3` | TODO | TODO | Placed at slot `4` | `[26, _, _, 3, 10, 12, 19]` |
+| Insert `26` | `26 % 7 = 5` | `5 -> 6 -> 1` | 3 | Placed at slot `0` | `[26, _, _, _, _, 12, 19]` |
+| Insert `3` | `3 % 7 = 3` | `3` | 1 | Placed at slot `3` | `[26, _, _, 3, _, 12, 19]` |
+| Insert `10` | `10 % 7 = 3` | `3 -> 4` | 2 | Placed at slot `4` | `[26, _, _, 3, 10, 12, 19]` |
 | Lookup `26` | `26 % 7 = 5` | `5 -> 6 -> 0` | 3 | Found `26` at slot `0` | *(unchanged)* |
-| Lookup `33` | `33 % 7 = 5` | TODO | TODO | Not found (hit empty slot `1`) | *(unchanged)* |
+| Lookup `33` | `33 % 7 = 5` | `5 -> 6 -> 0 -> 1` | 4 | Not found (hit empty slot `1`) | *(unchanged)* |
 
 ### 3.2 Implementation
 
@@ -382,6 +382,8 @@ Table 3.1, why can `linear_probe_lookup` stop as soon as it hits empty slot `1`
 without checking slots `2`, `3`, or `4`? Also, why does Open Addressing slow
 down much more drastically than Separate Chaining when the load factor $\alpha$
 approaches `1.0`?
+
+It can stop as soon as it hits empty slot `1` because we know that the key would come immediately after its hashed slot without any spaces/empty slots. Because there is an empty slot, we know that `33` is not in the table. Open addressing slows down more drastically than separate chaining when the load factor approaches 1 because a high load factor results in searching more and more slots, which results in time complexity closer to `O(n)`.
 
 ---
 
