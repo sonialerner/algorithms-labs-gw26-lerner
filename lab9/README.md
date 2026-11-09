@@ -89,11 +89,13 @@ order, are `[0, 1, 1, 2, 1]`. Visit neighbors in the order shown.
 | Vertex removed | Queue afterward | In-degree of `D` |
 |---|---|---|
 | A | `[B, C]` | 2 |
-| B | TODO | TODO |
-| C | TODO | TODO |
+| B | `[C, D]` | 1 |
+| C | `[D, E]` | 0 |
 
 Now add the edge `E -> B`. Which vertices reach the output before the
 algorithm stops? What does the function return?
+
+--> A, C, and D reach the output before the algorithm stops, resulting in a return values of A -> C -> D
 
 ### 1.2 Implementation
 
