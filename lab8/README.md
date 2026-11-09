@@ -123,11 +123,13 @@ newly assigned parents.
 | Vertex removed | Queue afterward | New parent assignments |
 |---|---|---|
 | 0 | `[1, 2]` | `parent[1] = 0`, `parent[2] = 0` |
-| 1 | TODO | TODO |
-| 2 | TODO | TODO |
-| 3 | TODO | TODO |
+| 1 | `[2, 3, 4]` | `parent[3] = 1`, `parent[4] = 1` |
+| 2 | `[3, 4]` | None |
+| 3 | `[4]` | None |
 
 Why does processing `2` leave `parent[4]` unchanged? Answer in one sentence.
+
+--> Processing `2` leaves `parent[4]` unchanged because we've already seen `4` (one of `2`'s neighbors), so we skip over it.
 
 ### 2.2 Implementation
 

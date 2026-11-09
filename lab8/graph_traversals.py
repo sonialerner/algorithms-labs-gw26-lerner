@@ -28,9 +28,19 @@ def bfs(graph, source):
     queue = deque([source])
 
     # TODO 2.2: process the queue and discover each unvisited neighbor
-    raise NotImplementedError("Complete bfs")
+    
 
-    return dist, parent
+    while len(queue) is not 0:
+        u = queue.popleft()
+        for v in graph[u]:
+            if not visited[v]:
+                visited[v] = True
+                dist[v] = dist[u] + 1
+                parent[v] = u
+                queue.append(v)
+    
+    return (dist, parent)
+
 
 
 def reconstruct_path(parent, source, target):
@@ -42,9 +52,14 @@ def reconstruct_path(parent, source, target):
     current = target
 
     # TODO 2.3: follow parents, reverse the path, and check that it starts at source
-    raise NotImplementedError("Complete reconstruct_path")
-
-    return path
+    while current is not None:
+        path.append(current)
+        current = parent[current]
+    
+    path.reverse()
+    if path[0] == source:
+        return path
+    return []
 
 
 def dfs(graph):
