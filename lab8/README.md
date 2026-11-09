@@ -227,9 +227,9 @@ vertex `5`.
 | Vertex | Parent | Discovery time | Finishing time |
 |---|---|---|---|
 | 0 | `None` | 1 | 10 |
-| 3 | TODO | TODO | TODO |
-| 4 | TODO | TODO | TODO |
-| 5 | TODO | TODO | TODO |
+| 3 | `1` | 2 | 10 |
+| 4 | `4` | 3 | 10 |
+| 5 | `None` | infinity | infinity |
 
 ### 3.2 Implementation
 
@@ -250,12 +250,14 @@ a vertex's neighbors requires scanning its entire row.
 
 | Cost | Adjacency list | Adjacency matrix |
 |---|---|---|
-| Store the graph | TODO | TODO |
-| Run BFS | TODO | TODO |
-| Run DFS | TODO | TODO |
+| Store the graph | `O(E)` | `O(V^2)` |
+| Run BFS | `O(V + E)` | `O(V^2)` |
+| Run DFS | `O(V + E)` | `O(V^2)` |
 
 In a few sentences, explain how many neighbor entries each traversal checks
 with each representation. Why does a sparse graph benefit from adjacency lists?
+
+--> Adjacency list traversals check only vertices that we know are adjacent to our current vertex, while adjacency matrix traversals check all other vertices. Thus, a sparse graph benefits from adjacency lists because it doesn't have to loop over every entry in the matrix when it knows that most of them will be `0`.
 
 ---
 
